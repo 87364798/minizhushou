@@ -1,61 +1,61 @@
 <van-notify id="van-notify"></van-notify>
 <view class="page-wrap">
-    <view class="header-card">
-        <view class="header-title">围钻预算</view>
-        <view class="header-subtitle">精确计算副石尺寸与布局</view>
+    <!-- 顶部紧凑标题 -->
+    <view class="header-bar">
+        <view class="title-main">围钻预算</view>
+        <view class="title-dot"></view>
+        <view class="title-sub">精确计算副石尺寸与布局</view>
     </view>
 
-    <view class="canvas-card">
-        <view class="canvas-title">布局预览</view>
-        <view class="canvas-wrap">
-            <canvas canvasId="myCanvas" class="preview-canvas"></canvas>
-        </view>
-    </view>
-
-    <view class="mode-card">
-        <view class="card-label">选择模式</view>
-        <van-radio-group bind:change="onChange" data-key="radio" value="{{radio}}" class="mode-group">
-            <van-radio class="mode-item mode-left" name="1">花头</van-radio>
-            <van-radio class="mode-item mode-right" name="2">戒指</van-radio>
-        </van-radio-group>
-    </view>
-
-    <view class="fields-card">
-        <view class="card-label">参数设置</view>
-        <view class="field-block" wx:for="{{items}}" wx:key="index">
-            <view class="field-row">
-                <view class="field-label">
-                    <text class="label-text">{{item.title}}</text>
-                </view>
-                <view class="field-input-wrap">
-                    <input bindinput="bindInput" class="field-input" id="{{index}}" placeholder="请输入" type="digit" value="{{item.value}}" placeholder-class="input-placeholder"></input>
-                    <text class="unit-text">{{item.unit}}</text>
+    <!-- 两列主体 -->
+    <view class="main-grid">
+        <!-- 左列：Canvas + 模式 -->
+        <view class="left-col">
+            <view class="canvas-box">
+                <view class="mini-label">布局预览</view>
+                <view class="canvas-wrap">
+                    <canvas canvasId="myCanvas" class="preview-canvas" style="width: {{canvasW || 260}}px; height: {{canvasH || 260}}px;"></canvas>
                 </view>
             </view>
-            <view class="slider-row-wrapper">
-                <view class="slider-thumb-bubble" style="left: {{item.bubbleLeft}};">
-                    <text class="bubble-num">{{item.value === '' ? item.min : item.value}}</text>
-                    <text class="bubble-unit">{{item.unit}}</text>
-                </view>
-                <view class="slider-row">
-                    <slider bindchange="bindSliderChange" bindchanging="bindSliderChanging" id="{{index}}" class="field-slider" min="{{item.min}}" max="{{item.max}}" step="{{item.step}}" value="{{item.value === '' ? item.min : item.value}}" block-size="22" activeColor="#FF9900" backgroundColor="#f0e6d8" block-color="#FF9900"></slider>
-                </view>
-            </view>
-            <view class="range-hint">
-                <text class="range-min">{{item.min}}</text>
-                <text class="range-max">{{item.max}}</text>
+            <view class="mode-box">
+                <van-radio-group bind:change="onChange" data-key="radio" value="{{radio}}" class="mode-group">
+                    <van-radio class="mode-item" name="1">花头</van-radio>
+                    <van-radio class="mode-item" name="2">戒指</van-radio>
+                </van-radio-group>
             </view>
         </view>
-    </view>
 
-    <view class="hint-card">
-        <view class="hint-icon">💡</view>
-        <view class="hint-text">提示：拖动滑条可快速调整数值，也可直接在输入框中输入；留空项将自动计算</view>
-    </view>
-
-    <view class="btn-card">
-        <view bindtap="onClick" class="calc-btn">
-            <text class="calc-btn-text">开始计算</text>
+        <!-- 右列：参数（紧凑三行两列） -->
+        <view class="right-col">
+            <view class="params-grid">
+                <view class="param-cell {{index === 3 ? 'param-cell-readonly' : ''}}" wx:for="{{items}}" wx:key="index">
+                    <view class="param-head">
+                        <text class="param-title">{{item.title}}</text>
+                        <view class="param-input-box">
+                            <input wx:if="{{index !== 3}}" bindinput="bindInput" class="param-input" id="{{index}}" type="digit" value="{{item.value}}"></input>
+                            <text wx:if="{{index === 3}}" class="param-input param-input-readonly">{{item.value}}</text>
+                            <text class="param-unit">{{item.unit}}</text>
+                        </view>
+                    </view>
+                    <!-- 戒指模式下，手寸卡片下方展示实际直径与周长 -->
+                    <view class="hk-hint" wx:if="{{index === 0 && radio === '2'}}">
+                        <text>直径 {{ringDiameter}} mm · 周长 {{ringCircumference}} mm</text>
+                    </view>
+                    <view class="slider-wrap" wx:if="{{index !== 3}}">
+                        <view class="bubble" style="left: {{item.bubbleLeft}};">
+                            <text>{{item.value === '' ? item.min : item.value}}{{item.unit}}</text>
+                        </view>
+                        <slider bindchange="bindSliderChange" bindchanging="bindSliderChanging" id="{{index}}" class="param-slider" min="{{item.min}}" max="{{item.max}}" step="{{item.step}}" value="{{item.value === '' ? item.min : item.value}}" block-size="16" activeColor="#FF9900" backgroundColor="#f0e6d8" block-color="#FF9900"></slider>
+                    </view>
+                    <view class="result-line" wx:if="{{index === 3}}">
+                        <text class="result-label">由其他参数自动计算得出</text>
+                    </view>
+                    <view class="range-line" wx:if="{{index !== 3}}">
+                        <text>{{item.min}}</text>
+                        <text>{{item.max}}</text>
+                    </view>
+                </view>
+            </view>
         </view>
     </view>
 </view>
