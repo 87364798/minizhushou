@@ -1,0 +1,19 @@
+<view class="container">
+    <swiper autoplay="{{autoplay}}" circular="true" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+        <swiper-item wx:for="{{imgUrls}}" wx:key="ingUrls">
+            <navigator url="{{item.navUrl}}">
+                <image class="slide-image" mode="widthFix" src="{{item.imgUrl}}"></image>
+            </navigator>
+        </swiper-item>
+    </swiper>
+    <wxc-flex class="wrap" wrap="wrap" style="display: inline-block;">
+        <view bindtap="bindNavigatorToTools" class="item" data-navurl="{{item.navUrl}}" wx:for="{{grids}}" wx:key="grids">
+            <image class="icon" src="{{item.imgUrl}}"></image>
+            <view class="label">{{item.title}}</view>
+        </view>
+    </wxc-flex>
+    <view class="cc bg-white margin_top">
+        <wxc-button btnStyle="width:600rpx;padding: 0;  margin: 30rpx;" openType="contact" plain="{{true}}" type="primary">联系客服
+    </wxc-button>
+    </view>
+</view>

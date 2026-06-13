@@ -1,0 +1,16 @@
+<view class="myTitle-bg flex">
+    <view class="myTitle">金</view>
+    <view class="line color--control"></view>
+    <view class="grids flex">
+        <view class="grid" hoverClass="active" wx:for="{{gold}}" wx:key="Gold">
+            <view class="label flex">
+                <view class="title flex c-secondary" style="font-size: 24rpx;">
+                    {{item.title}}：
+                    <input bindinput="bindKeyInput" class="data-view iput" id="{{index}}" placeholder="{{item.placeholder}}" type="digit" value="{{item.value}}"></input>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="line-gray"></view>
+    <text class="c-secondary" style="font-size: 24rpx;">{{result}}</text>
+</view>

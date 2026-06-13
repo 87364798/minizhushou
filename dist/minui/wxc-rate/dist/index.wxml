@@ -1,0 +1,3 @@
+<view bindtap="handlerRate" class="rate">
+    <wxc-icon _pid="{{_pid}}" class="rate__icon" color="{{value-1>=index?activeColor:color}}" data-score="{{index+1}}" size="{{size}}" style="margin-right: {{padding}}rpx;" type="{{value-1>=index?'star-active':'star'}}" wx:for="{{count}}" wx:key="index"></wxc-icon>
+</view>

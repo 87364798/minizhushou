@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+        "wxc-button": "../../dist/minui/wxc-button/dist/index",
+        "wxc-flex": "../../dist/minui/wxc-flex/dist/index",
+        "gold": "/dist/components/gold/index",
+        "diamond": "/dist/components/diamond/index",
+        "additional": "/dist/components/additional/index"
+    }
+}

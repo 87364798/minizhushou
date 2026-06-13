@@ -1,0 +1,4 @@
+<wxc-mask _pid="{{_pid}}" locked="{{locked}}" status="{{maskStatus}}"></wxc-mask>
+<view bindtap="popupTap" class="popup popup__status--{{status}} popup__content-align--{{align}} popup__status--{{status}}--animotion-{{animationMode}}" style="z-index: {{zIndex}};">
+    <slot></slot>
+</view>

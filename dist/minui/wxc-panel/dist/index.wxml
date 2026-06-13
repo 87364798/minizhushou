@@ -1,0 +1,4 @@
+<view class="panel__title" wx:if="{{title}}">{{title}}</view>
+<view bindtap="onClick" class="panel {{margin?'':'panel__margin'}} {{border?'':'panel__border'}}">
+    <slot></slot>
+</view>

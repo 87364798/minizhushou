@@ -1,0 +1,10 @@
+{
+    "usingComponents": {
+        "wxc-flex": "../../dist/minui/wxc-flex/dist/index",
+        "wxc-loadmore": "../../dist/minui/wxc-loadmore/dist/index",
+        "van-button": "../../dist/vant/button/index",
+        "van-notify": "../../dist/vant/notify/index",
+        "van-radio": "../../dist/vant/radio/index",
+        "van-radio-group": "../../dist/vant/radio-group/index"
+    }
+}

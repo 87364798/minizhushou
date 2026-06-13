@@ -1,0 +1,17 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/logs/logs",
+        "pages/aroundDiamonds/index",
+        "pages/gratuity/index",
+        "pages/transformation/index",
+        "pages/calculator/index",
+        "pages/web/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#2F67DE",
+        "navigationBarTitleText": "珠宝小助手",
+        "navigationBarTextStyle": "white"
+    }
+}

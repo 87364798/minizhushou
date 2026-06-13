@@ -1,0 +1,7 @@
+<radio-group bindchange="radioChange" class="select__group">
+    <label class="select__cell" wx:for="{{items}}" wx:key="value">
+        <view class="select__text">{{item.title}}</view>
+        <view class="select__desc">{{item.desc}}</view>
+        <radio checked="{{item.value===checked}}" class="select__radio" color="{{color}}" value="{{item.value}}"></radio>
+    </label>
+</radio-group>

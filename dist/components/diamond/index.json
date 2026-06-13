@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "wxc-panel": "../../minui/wxc-panel/dist/index",
+        "van-icon": "../../vant/icon/index"
+    }
+}

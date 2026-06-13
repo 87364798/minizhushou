@@ -1,0 +1,24 @@
+<view class="containerr">
+    <view class="header">
+        <view class="group">
+            <image src="{{logo}}"></image>
+            <text class="name">{{title}}</text>
+        </view>
+    </view>
+    <view class="cc group">
+        <text class="name">我们的成长离不开大家的支持与帮助！</text>
+    </view>
+    <view class="line"></view>
+    <wxc-flex class="wrap price-list" wrap="wrap">
+        <view bindtap="selectItem" class="item" data-item="{{item}}" wx:for="{{prices}}" wx:key="item">
+            <view class="price-box {{selected==item?'active':''}}">
+                <em>
+                    <text class="price">{{item}}</text>  元</em>
+            </view>
+        </view>
+    </wxc-flex>
+    <wxc-flex class="cc myRow" justify="space-between">
+        <input bindinput="bindInput" class="iput" placeholder="自定义" placeholderStyle="color: #eee" type="number" value="{{iputValue}}"></input>
+        <van-button plain bindtap="bindGratuity" type="primary">赞赏作者</van-button>
+    </wxc-flex>
+</view>

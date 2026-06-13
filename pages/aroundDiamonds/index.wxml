@@ -1,0 +1,61 @@
+<van-notify id="van-notify"></van-notify>
+<view class="page-wrap">
+    <view class="header-card">
+        <view class="header-title">围钻预算</view>
+        <view class="header-subtitle">精确计算副石尺寸与布局</view>
+    </view>
+
+    <view class="canvas-card">
+        <view class="canvas-title">布局预览</view>
+        <view class="canvas-wrap">
+            <canvas canvasId="myCanvas" class="preview-canvas"></canvas>
+        </view>
+    </view>
+
+    <view class="mode-card">
+        <view class="card-label">选择模式</view>
+        <van-radio-group bind:change="onChange" data-key="radio" value="{{radio}}" class="mode-group">
+            <van-radio class="mode-item mode-left" name="1">花头</van-radio>
+            <van-radio class="mode-item mode-right" name="2">戒指</van-radio>
+        </van-radio-group>
+    </view>
+
+    <view class="fields-card">
+        <view class="card-label">参数设置</view>
+        <view class="field-block" wx:for="{{items}}" wx:key="index">
+            <view class="field-row">
+                <view class="field-label">
+                    <text class="label-text">{{item.title}}</text>
+                </view>
+                <view class="field-input-wrap">
+                    <input bindinput="bindInput" class="field-input" id="{{index}}" placeholder="请输入" type="digit" value="{{item.value}}" placeholder-class="input-placeholder"></input>
+                    <text class="unit-text">{{item.unit}}</text>
+                </view>
+            </view>
+            <view class="slider-row-wrapper">
+                <view class="slider-thumb-bubble" style="left: {{item.bubbleLeft}};">
+                    <text class="bubble-num">{{item.value === '' ? item.min : item.value}}</text>
+                    <text class="bubble-unit">{{item.unit}}</text>
+                </view>
+                <view class="slider-row">
+                    <slider bindchange="bindSliderChange" bindchanging="bindSliderChanging" id="{{index}}" class="field-slider" min="{{item.min}}" max="{{item.max}}" step="{{item.step}}" value="{{item.value === '' ? item.min : item.value}}" block-size="22" activeColor="#FF9900" backgroundColor="#f0e6d8" block-color="#FF9900"></slider>
+                </view>
+            </view>
+            <view class="range-hint">
+                <text class="range-min">{{item.min}}</text>
+                <text class="range-max">{{item.max}}</text>
+            </view>
+        </view>
+    </view>
+
+    <view class="hint-card">
+        <view class="hint-icon">💡</view>
+        <view class="hint-text">提示：拖动滑条可快速调整数值，也可直接在输入框中输入；留空项将自动计算</view>
+    </view>
+
+    <view class="btn-card">
+        <view bindtap="onClick" class="calc-btn">
+            <text class="calc-btn-text">开始计算</text>
+        </view>
+    </view>
+</view>

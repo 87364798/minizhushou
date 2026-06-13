@@ -1,0 +1,313 @@
+[is="dist/vant/goods-action-button/index"] {
+    flex: 1;
+}
+
+[is="dist/vant/tabbar-item/index"] {
+    flex: 1;
+}
+/*! Import by _C[0], whose real path we cannot found. */
+.container {
+    min-height: 100vh;
+    box-sizing: border-box;
+    background: #EBEBEB;
+    padding: 20px; /* 增加容器内边距 */
+}
+
+.bg-main {
+    background: #2F67DE;
+}
+
+.bg-second {
+    background: #FF9900;
+}
+
+.bg-white {
+    background: #FFF;
+}
+
+.color-sec {
+    color: #FF9900;
+}
+
+.line {
+    width: 100%;
+    height: 1rpx;
+    background-color: #e0e0e0; /* 分隔线颜色 */
+    margin: 20px 0; /* 分隔线上下间距 */
+}
+
+.line-gray {
+    width: 100%;
+    height: 1rpx;
+    background: #e5e5e5;
+}
+
+.line-gray-column {
+    width: 1rpx;
+    height: 100%;
+    background: #e5e5e5;
+}
+
+.iput, .iput2, .iput-sec {
+    border: 1px solid #ccc; /* 边框颜色 */
+    border-radius: 4px; /* 边框圆角 */
+    padding: 5px; /* 内边距 */
+    box-sizing: border-box; /* 包含内边距和边框 */
+}
+
+.iput2 {
+    width: 200rpx;
+    text-align: center;
+}
+
+.iput-sec {
+    line-height: 30px;
+    margin-right: 5px;
+    margin-left: 5px;
+    text-align: center;
+    border-color: #FF9900;
+}
+
+.iput {
+    line-height: 30px;
+    border-bottom-width: 1px;
+    margin-right: 5px;
+    margin-left: 5px;
+    text-align: left;
+    border-bottom-color: #888;
+}
+
+.myTitle {
+    line-height: 30px;
+    border-bottom-color: #FF9900;
+}
+
+.myTitle-bg {
+    min-height: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background: #FFF;
+    padding-bottom: 8px;
+}
+
+.cc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.myColumn {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.myRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.hide {
+    display: none;
+}
+
+.color--brand {
+    background: #2F67DE;
+}
+
+.color--control {
+    background: #f90;
+}
+
+.color--control--text {
+    color: #f90!important;
+}
+
+.color--topic {
+    color: #333;
+}
+
+.color-secondary {
+    color: #666;
+}
+
+.color--prompt {
+    background: #999;
+}
+
+.color--split {
+    background: #ececec;
+}
+
+.color--background {
+    background: #efefef;
+}
+
+.color--prompt-bg {
+    background: #ffe8ee;
+}
+
+.color--white {
+    color: #fff;
+}
+
+.bc--brand {
+    background: #2F67DE;
+}
+
+.bc-secondary {
+    background: #666;
+}
+
+.c-control {
+    color: #f90!important;
+}
+
+.c-secondary {
+    color: #666;
+}
+
+.scaleView {
+    transform: scale(.8);
+}
+
+.icon {
+    width: 24px; /* 设置图标宽度 */
+    height: 24px; /* 设置图标高度 */
+    margin-right: 5px; /* 图标与文字之间的间距 */
+}
+
+/*! Import end */
+
+/*! Import by _C[1], whose real path we cannot found. */
+.van-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.van-multi-ellipsis--l2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.van-multi-ellipsis--l3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.van-clearfix::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.van-hairline,.van-hairline--bottom,.van-hairline--left,.van-hairline--right,.van-hairline--surround,.van-hairline--top,.van-hairline--top-bottom {
+    position: relative;
+}
+
+.van-hairline--bottom::after,.van-hairline--left::after,.van-hairline--right::after,.van-hairline--surround::after,.van-hairline--top-bottom::after,.van-hairline--top::after,.van-hairline::after {
+    content: ' ';
+    position: absolute;
+    pointer-events: none;
+    box-sizing: border-box;
+    transform-origin: center;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    transform: scale(.5);
+    border: 0 solid #eee;
+}
+
+.van-hairline--top::after {
+    border-top-width: 1px;
+}
+
+.van-hairline--left::after {
+    border-left-width: 1px;
+}
+
+.van-hairline--right::after {
+    border-right-width: 1px;
+}
+
+.van-hairline--bottom::after {
+    border-bottom-width: 1px;
+}
+
+.van-hairline--top-bottom::after {
+    border-width: 1px 0;
+}
+
+.van-hairline--surround::after {
+    border-width: 1px;
+}
+/*! Import end */
+
+.header {
+    margin-bottom: 15px; /* 头部与下方内容间距 */
+    font-size: 20px; /* 头部字体大小 */
+    font-weight: bold; /* 头部字体加粗 */
+}
+
+.item {
+    margin: 10px 0; /* 项目间距 */
+    padding: 10px; /* 项目内边距 */
+    background-color: #f9f9f9; /* 项目背景色 */
+    border: 1px solid #e0e0e0; /* 项目边框 */
+    border-radius: 5px; /* 项目圆角 */
+}
+
+.grid {
+    display: flex; /* 使用 Flexbox 布局 */
+    align-items: center; /* 垂直居中对齐 */
+    margin-bottom: 15px; /* 增加每个 grid 之间的间距 */
+    padding: 10px; /* 增加 grid 内部的内边距 */
+    background-color: #fff; /* 设置背景色 */
+    border-radius: 5px; /* 增加圆角 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 增加阴影 */
+}
+
+.title {
+    display: flex; /* 使用 Flexbox 布局 */
+    align-items: center; /* 垂直居中对齐 */
+    justify-content: space-between; /* 水平分散对齐 */
+}
+
+input, 
+picker {
+    display: flex; /* 使用 Flexbox 布局 */
+    align-items: center; /* 垂直居中对齐 */
+    border: 1px solid #ccc; /* 添加边框 */
+    border-radius: 4px; /* 增加圆角 */
+    padding: 5px; /* 添加内边距 */
+    background-color: #fff; /* 设置背景色 */
+}
+
+title {
+    font-size: 16px; /* 调整标题字体大小 */
+    color: #333; /* 设置标题颜色 */
+}
+
+.size {
+    font-size: 14px; /* 调整尺寸显示字体大小 */
+    color: #666; /* 设置尺寸显示颜色 */
+}
+
+@media (max-width: 600px) {
+    .myTitle-bg {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .iput-sec, .iput, .iput2 {
+        line-height: 25px;
+    }
+}

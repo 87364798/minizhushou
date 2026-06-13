@@ -1,0 +1,9 @@
+{
+    "component": true,
+    "usingComponents": {
+        "van-row": "../../vant/row/index",
+        "van-col": "../../vant/col/index",
+        "van-icon": "../../vant/icon/index",
+        "wxc-panel": "../../minui/wxc-panel/dist/index"
+    }
+}

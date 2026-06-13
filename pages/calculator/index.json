@@ -1,0 +1,10 @@
+{
+    "usingComponents": {
+        "wxc-panel": "../../dist/minui/wxc-panel/dist/index",
+        "wxc-cc": "../../dist/minui/wxc-cc/dist/index",
+        "van-toast": "../../dist/vant/toast/index",
+        "gold": "/dist/components/gold/index",
+        "diamond": "/dist/components/diamond/index",
+        "additional": "/dist/components/additional/index"
+    }
+}

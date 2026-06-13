@@ -1,0 +1,6 @@
+<form bindsubmit="onSubmit" reportSubmit="{{true}}">
+    <button appParameter="{{appParameter}}" bindcontact="onContact" binderrror="onError" bindgetphonenumber="getPhoneNumber" bindgetuserinfo="getUserInfo" bindtap="btnClick" class="btn btn__size--{{size}} btn__{{type}}--{{plain}}" formType="submit" hoverClass="{{hoverClass}}" hoverStartTime="{{hoverStartTime}}" hoverStayTime="{{hoverStayTime}}" hoverStopPropagation="{{hoverStopPropagation}}" lang="{{lang}}" loading="{{loading}}" openType="{{openType}}" sendMessageImg="{{sendMessageImg}}" sendMessagePath="{{sendMessagePath}}" sendMessageTitle="{{sendMessageTitle}}" sessionFrom="{{sessionFrom}}" showMessageCard="{{showMessageCard}}" style="{{btnStyle}}">
+        {{value}}
+        <slot wx:if="{{!value}}"></slot>
+    </button>
+</form>

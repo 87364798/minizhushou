@@ -1,0 +1,28 @@
+<wxc-panel border="{{false}}" class="myTitle flex">
+    <checkbox-group bindchange="bindCheckTitle" data-checked="{{show}}" data-tag="diamond">
+        <checkbox checked="{{show}}" class="scaleView">{{title}}</checkbox>
+    </checkbox-group>
+</wxc-panel>
+<view class="myTitle-bg {{show?'':'hide'}} flex">
+    <view class="line color--control"></view>
+    <view class="mt32" wx:for="{{items}}" wx:key="items">
+        <van-row class="c-secondary flex" style="font-size: 24rpx; ">
+            <van-col span="10" class="flex">
+                <view class="myRow cc">
+          项名：
+          <input bindinput="bindDataListInput" class="data-view iput" data-tag="name" id="{{index}}" value="{{item.name}}"></input>
+                </view>
+            </van-col>
+            <van-col span="10" class="flex">
+                <view class="myRow cc">
+          金额：
+          <input bindinput="bindDataListInput" class="data-view iput" data-tag="total" id="{{index}}" type="digit" value="{{item.total}}"></input>
+                </view>
+            </van-col>
+            <van-col class="cc flex" span="4">
+                <van-icon bindtap="bindAddAndDel" color="#888" data-tag="del" id="{{index}}" name="delete" size="20px"></van-icon>
+            </van-col>
+        </van-row>
+    </view>
+    <view bindtap="bindAddAndDel" class="btn cc mt32 flex" data-tag="add">添加</view>
+</view>

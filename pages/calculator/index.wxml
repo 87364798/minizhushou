@@ -1,0 +1,50 @@
+<template name="footer">
+    <view class="line-gray"></view>
+    <view class="myTitle-bg ">
+        <view class="myRow">
+            <checkbox-group bindchange="bindCheckCopy">
+                <label wx:for="{{footer}}" wx:key="footer">
+                    <checkbox checked="{{item.checked}}" class="scaleView" disabled="{{item.disabled}}" value="{{index}}">{{item.name}}</checkbox>
+                </label>
+            </checkbox-group>
+            <view bindtap="copyData" class="copyBtn cc">复制数据</view>
+        </view>
+    </view>
+</template>
+<template name="summary">
+    <view class="myTitle-bg mt8">
+        <view class="myTitle">总价</view>
+        <view class="line color--control"></view>
+        <text class="pt c-secondary" style="font-size: 24rpx; ">{{sumMary.str}}</text>
+        <view class="myRow">
+            <text class="c-secondary cc" style="font-size: 24rpx; ">造价：</text>
+            <text class="c-control" style="font-size: 48rpx; ">{{sumMary.sumMoney}}</text>
+        </view>
+    </view>
+</template>
+<van-toast id="van-toast"></van-toast>
+<view class="container">
+    <view class="banner bg-white">
+        <wxc-panel border="{{false}}">
+            <view class="myRow font-size-32">
+                <view>今日金价：</view>
+                <view class="color--control--text p-r-5">{{Au9999}}</view>
+                <view>18K：</view>
+                <view class="color--control--text p-r-5">{{Au750}}</view>
+                <view>{{date}}</view>
+            </view>
+        </wxc-panel>
+        <wxc-panel border="{{false}}">
+            <wxc-cc class="myRow font-size-36">
+                <view>品名：</view>
+                <input bindinput="bindInputName" class="iput">{{name}}</input>
+            </wxc-cc>
+        </wxc-panel>
+    </view>
+    <gold bind:goldSum="bindgoldSum"></gold>
+    <diamond bind:diamondSum="bindDiamondSum0" pickerIndex="0" title="主石"></diamond>
+    <diamond bind:diamondSum="bindDiamondSum1" pickerIndex="1" title="副石"></diamond>
+    <additional bind:addSum="bindaddSum"></additional>
+    <template is="summary" data="{{sumMary:sumMary}}"></template>
+    <template is="footer" data="{{footer:footer}}"></template>
+</view>

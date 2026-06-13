@@ -1,0 +1,20 @@
+<view>
+    <view class="grids">
+        <view class="grid" hoverClass="active" wx:for="{{grids}}" wx:key="index">
+            <view class="label">
+                <view class="title flex">
+                    <image class="icon" src="{{item.imgUrl}}"></image> {{item.title}}：
+                    <picker bindchange="bindMultiPickerChange" class="{{item.flag===0?'hide':''}} data-view" id="{{index}}" mode="multiSelector" range="{{item.multiArray}}" value="{{item.multiIndex}}">
+                        <view class="zan-c-gray-dark size">{{item.size}}</view>
+                    </picker>
+                    <input bindinput="bindKeyInput" class="{{item.flag===1?'hide':''}} data-view" id="{{index}}" type="digit" value="{{item.size}}"></input>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="list-item">
+        <wxc-list bind:click="bindListClick" class="item" data-navurl="{{item.navUrl}}" desc="{{item.slot?'':item.desc}}" mode="{{index==list.length-1?'none':''}}" src="{{item.src}}" title="{{item.title}}" wx:for="{{list}}" wx:key="index">
+            <view class="desc-highlight" wx:if="{{item.slot&&item.desc}}">{{item.desc}}</view>
+        </wxc-list>
+    </view>
+</view>
