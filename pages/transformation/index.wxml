@@ -1,20 +1,71 @@
-<view>
-    <view class="grids">
-        <view class="grid" hoverClass="active" wx:for="{{grids}}" wx:key="index">
-            <view class="label">
-                <view class="title flex">
-                    <image class="icon" src="{{item.imgUrl}}"></image> {{item.title}}：
-                    <picker bindchange="bindMultiPickerChange" class="{{item.flag===0?'hide':''}} data-view" id="{{index}}" mode="multiSelector" range="{{item.multiArray}}" value="{{item.multiIndex}}">
-                        <view class="zan-c-gray-dark size">{{item.size}}</view>
-                    </picker>
-                    <input bindinput="bindKeyInput" class="{{item.flag===1?'hide':''}} data-view" id="{{index}}" type="digit" value="{{item.size}}"></input>
-                </view>
+<!-- pages/transformation/index.wxml -->
+<view class="page-wrap">
+
+    <!-- 顶部标题卡片 -->
+    <view class="header-card">
+        <view class="header-title">手寸换算</view>
+        <view class="header-sub">任意输入一项，其他自动换算</view>
+    </view>
+
+    <!-- 每个制式一张卡片 -->
+    <view class="grid-item" wx:for="{{grids}}" wx:key="key">
+        <view class="grid-title-row">
+            <!-- 国旗 logo：hk / eu / us / jp -->
+            <view class="logo-circle logo-flag" wx:if="{{item.iconType === 'flag'}}">
+                <image class="logo-img" src="{{item.iconUrl}}" mode="aspectFit"></image>
             </view>
+            <!-- 直径矢量图标：圆圈 + 横向直径虚线 -->
+            <view class="logo-circle logo-vector" wx:if="{{item.iconType === 'vector-diameter'}}">
+                <view class="vec-ring"></view>
+                <view class="vec-diameter-line"></view>
+                <text class="vec-label">Ø</text>
+            </view>
+            <!-- 周长矢量图标：圆圈 + 绕圆弧线 + 箭头 -->
+            <view class="logo-circle logo-vector" wx:if="{{item.iconType === 'vector-circumference'}}">
+                <view class="vec-ring"></view>
+                <view class="vec-circ-arrow"></view>
+                <text class="vec-label">C</text>
+            </view>
+            <text class="grid-title">{{item.title}}</text>
+        </view>
+
+        <view class="grid-input-row">
+            <input
+                class="grid-input"
+                type="digit"
+                id="{{item.key}}"
+                placeholder="请输入"
+                value="{{item.value}}"
+                bindinput="bindKeyInput"
+            />
+            <text class="grid-unit">{{item.unit}}</text>
+        </view>
+
+        <slider
+            class="grid-slider"
+            id="{{item.key}}"
+            min="{{item.min}}"
+            max="{{item.max}}"
+            step="{{item.step}}"
+            value="{{item.value === '' ? item.min : item.value}}"
+            activeColor="#FF9900"
+            backgroundColor="#f0e6d8"
+            block-size="20"
+            block-color="#FF9900"
+            bindchange="bindSliderChange"
+            bindchanging="bindSliderChanging"
+        />
+
+        <view class="grid-hint-row">
+            <text class="range-txt">{{item.min}}</text>
+            <text class="grid-hint">{{item.hint}}</text>
+            <text class="range-txt">{{item.max}}</text>
         </view>
     </view>
-    <view class="list-item">
-        <wxc-list bind:click="bindListClick" class="item" data-navurl="{{item.navUrl}}" desc="{{item.slot?'':item.desc}}" mode="{{index==list.length-1?'none':''}}" src="{{item.src}}" title="{{item.title}}" wx:for="{{list}}" wx:key="index">
-            <view class="desc-highlight" wx:if="{{item.slot&&item.desc}}">{{item.desc}}</view>
-        </wxc-list>
+
+    <!-- 底部说明 -->
+    <view class="footer-tip">
+        <text>· 数据来源于标准戒指尺寸对照表 ·</text>
     </view>
+
 </view>

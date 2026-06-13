@@ -1,48 +1,37 @@
-var t = require("../../utils/parse.js"), i = require("ringSize.js");
+// pages/transformation/index.js
+// 手寸转换 —— 多制式（港度/欧度/美度/日度/直径/周长）互转
+// 数据完全来自本地 ringSizeData.js，不依赖网络。
+
+var i = require("./ringSize.js");
 
 Page({
     data: {
-        grids: [],
-        list: []
+        grids: [],         // 每一项：{ key, title, hint, unit, min, max, step, value }
+        activeIndex: 0     // 当前正在编辑的输入项索引（用于视觉高亮，可选）
     },
-    bindListClick: function(t) {
-        var i = t.currentTarget.dataset.navurl;
-        if (i) {
-            wx.navigateTo({
-                url: i
-            });
-        } else {
-            console.log('导航路径无效');
-        }
-    },
-    bindMultiPickerChange: function(t) {
-        i.pickerTransformation(this, t);
-    },
-    bindKeyInput: function(t) {
-        i.inputTransformation(this, t);
-    },
-    onLoad: function(n) {
+
+    onLoad: function() {
         i.init(this);
-        i.setViewData(); // 确保调用以填充数据
-        var r = this,
-            a = t.Object.extend("setting"),
-            e = new t.Query(a);
-        e.equalTo("key", "transformation"),
-        e.find({
-            success: function(t) {
-                var i = t[0].get("array");
-                if (i) {
-                    r.setData({
-                        list: i
-                    });
-                } else {
-                    console.log("未找到转换数据");
-                }
-            },
-            error: function(t, i) {
-                console.log("transformation.js: transformation: query object fail");
-                // 这里可以添加默认值或其他处理逻辑
-            }
-        });
+        i.setViewData(this);
+    },
+
+    onShow: function() {
+        // 每次回到页面时刷新一次，保证数据最新
+        i.setViewData(this);
+    },
+
+    // 输入框变化
+    bindKeyInput: function(e) {
+        i.inputTransformation(this, e);
+    },
+
+    // 滑条拖动结束时触发
+    bindSliderChange: function(e) {
+        i.pickerTransformation(this, e);
+    },
+
+    // 滑条拖动中实时触发（更流畅的体验）
+    bindSliderChanging: function(e) {
+        i.pickerTransformation(this, e);
     }
 });
