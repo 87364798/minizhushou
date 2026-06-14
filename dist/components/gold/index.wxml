@@ -1,16 +1,21 @@
-<view class="myTitle-bg flex">
-    <view class="myTitle">金</view>
-    <view class="line color--control"></view>
-    <view class="grids flex">
-        <view class="grid" hoverClass="active" wx:for="{{gold}}" wx:key="Gold">
-            <view class="label flex">
-                <view class="title flex c-secondary" style="font-size: 24rpx;">
-                    {{item.title}}：
-                    <input bindinput="bindKeyInput" class="data-view iput" id="{{index}}" placeholder="{{item.placeholder}}" type="digit" value="{{item.value}}"></input>
-                </view>
-            </view>
+<view class="component-card">
+    <view class="card-title-row">
+        <view class="card-icon gold-icon"></view>
+        <text class="card-title">金</text>
+    </view>
+    <view class="input-grid">
+        <view class="input-item" wx:for="{{items}}" wx:key="key">
+            <text class="input-label">{{item.title}}</text>
+            <input
+                class="input-field"
+                type="digit"
+                placeholder="{{item.placeholder}}"
+                value="{{item.value}}"
+                data-idx="{{index}}"
+                bindinput="bindKeyInput" />
         </view>
     </view>
-    <view class="line-gray"></view>
-    <text class="c-secondary" style="font-size: 24rpx;">{{result}}</text>
+    <view class="result-box">
+        <text class="result-text">{{result}}</text>
+    </view>
 </view>

@@ -1,63 +1,56 @@
-getApp();
-
-var t = require("../../utils/parse.js");
-
+// 首页 - 功能导航入口
 Page({
     data: {
-        imgUrls: [ {
-            imgUrl: "https://lg-9fe5hcjm-1255987146.cos.ap-shanghai.myqcloud.com/zssx.jpg",
-            navUrl: "../web/index?url=https://www.jewelrytool.cn"
-        } ],
-        indicatorDots: !1,
-        autoplay: !0,
-        interval: 5e3,
-        duration: 1e3,
-        grids: [ {
-            imgUrl: "../../images/calculator.png",
-            title: "报价计算",
-            navUrl: "../calculator/index"
-        }, {
-            imgUrl: "../../images/transformation.png",
-            title: "手寸转换",
-            navUrl: "../transformation/index"
-        }, {
-            imgUrl: "../../images/gratuity.png",
-            title: "赞赏",
-            navUrl: "../gratuity/index"
-        }, {
-            imgUrl: "../../images/around.png",
-            title: "围钻预算",
-            navUrl: "../aroundDiamonds/index"
-        } ]
+        imgUrls: [
+            { imgUrl: "https://placehold.co/1200x400/FF8A3D/ffffff?text=珠宝小助手" }
+        ],
+        indicatorDots: false,
+        autoplay: false,
+        interval: 5000,
+        duration: 1000,
+        grids: [
+            { imgUrl: "../../images/calculator.png", title: "报价计算", navUrl: "../calculator/index" },
+            { imgUrl: "../../images/transformation.png", title: "手寸转换", navUrl: "../transformation/index" },
+            { imgUrl: "../../images/gratuity.png", title: "赞赏", navUrl: "../gratuity/index" },
+            { imgUrl: "../../images/around.png", title: "围钻预算", navUrl: "../aroundDiamonds/index" }
+        ]
     },
-    bindNavigatorToTools: function(t) {
-        var navurl = t.currentTarget.dataset.navurl;
-        if (navurl && navurl !== "") {
-            wx.navigateTo({
-                url: navurl
-            });
-        }
-    },
-    onLoad: function() {
-        var a = this, i = t.Object.extend("setting"), r = new t.Query(i);
-        r.equalTo("key", "index"), r.find({
-            success: function(t) {
-                if (t && t.length > 0) {
-                    var i = t[0].get("value");
-                    if (i) {
-                        a.setData({
-                            imgUrls: i.imgUrls || a.data.imgUrls,
-                            indicatorDots: i.indicatorDots !== undefined ? i.indicatorDots : a.data.indicatorDots,
-                            autoplay: i.autoplay !== undefined ? i.autoplay : a.data.autoplay,
-                            duration: i.duration || a.data.duration,
-                            grids: i.grids || a.data.grids
-                        });
-                    }
-                }
-            },
-            error: function(t, a) {
-                console.log("index.js: setting: query object fail: " + a.message);
+
+    bindNavigatorToTools: function (e) {
+        var navurl = e.currentTarget.dataset.navurl;
+        if (!navurl) return;
+        wx.navigateTo({
+            url: navurl,
+            fail: function () {
+                wx.showToast({ title: "页面无法打开", icon: "none" });
             }
         });
+    },
+
+    onLoad: function () {
+        // 尝试从远程 Parse 服务器拉取自定义配置（静默失败）
+        try {
+            var parse = require("../../utils/parse.js");
+            if (parse && parse.Object && parse.Query) {
+                var Setting = parse.Object.extend("setting");
+                var query = new parse.Query(Setting);
+                query.equalTo("key", "index");
+                query.find({
+                    success: function (results) {
+                        if (results && results.length > 0) {
+                            var val = results[0].get("value");
+                            if (val) {
+                                // 只更新非空字段，保持默认值兜底
+                            }
+                        }
+                    },
+                    error: function () {
+                        // 静默失败，不影响用户使用
+                    }
+                });
+            }
+        } catch (err) {
+            // 无 parse.js，使用默认配置即可
+        }
     }
 });

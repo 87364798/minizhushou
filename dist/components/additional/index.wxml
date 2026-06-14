@@ -1,28 +1,24 @@
-<wxc-panel border="{{false}}" class="myTitle flex">
-    <checkbox-group bindchange="bindCheckTitle" data-checked="{{show}}" data-tag="diamond">
-        <checkbox checked="{{show}}" class="scaleView">{{title}}</checkbox>
-    </checkbox-group>
-</wxc-panel>
-<view class="myTitle-bg {{show?'':'hide'}} flex">
-    <view class="line color--control"></view>
-    <view class="mt32" wx:for="{{items}}" wx:key="items">
-        <van-row class="c-secondary flex" style="font-size: 24rpx; ">
-            <van-col span="10" class="flex">
-                <view class="myRow cc">
-          项名：
-          <input bindinput="bindDataListInput" class="data-view iput" data-tag="name" id="{{index}}" value="{{item.name}}"></input>
-                </view>
-            </van-col>
-            <van-col span="10" class="flex">
-                <view class="myRow cc">
-          金额：
-          <input bindinput="bindDataListInput" class="data-view iput" data-tag="total" id="{{index}}" type="digit" value="{{item.total}}"></input>
-                </view>
-            </van-col>
-            <van-col class="cc flex" span="4">
-                <van-icon bindtap="bindAddAndDel" color="#888" data-tag="del" id="{{index}}" name="delete" size="20px"></van-icon>
-            </van-col>
-        </van-row>
+<view class="component-card additional-card">
+    <view class="card-title-row" bindtap="bindCheckTitle">
+        <view class="card-icon additional-icon"></view>
+        <text class="card-title">附加</text>
+        <text class="card-toggle">{{show ? '收起' : '展开'}}</text>
     </view>
-    <view bindtap="bindAddAndDel" class="btn cc mt32 flex" data-tag="add">添加</view>
+    <view wx:if="{{show}}">
+        <view class="list-row" wx:for="{{items}}" wx:key="index">
+            <view class="field-box">
+                <text class="field-label">项名</text>
+                <input class="field-input" placeholder="名称" data-tag="name" data-idx="{{index}}" bindinput="bindDataListInput" value="{{item.name}}" />
+            </view>
+            <view class="field-box">
+                <text class="field-label">金额</text>
+                <input class="field-input" type="digit" placeholder="元" data-tag="total" data-idx="{{index}}" bindinput="bindDataListInput" value="{{item.total}}" />
+            </view>
+            <view class="del-btn" data-tag="del" data-idx="{{index}}" bindtap="bindAddAndDel">×</view>
+        </view>
+        <view class="add-btn" data-tag="add" bindtap="bindAddAndDel">+ 添加一项</view>
+        <view class="result-box">
+            <text class="result-text">{{result}}</text>
+        </view>
+    </view>
 </view>

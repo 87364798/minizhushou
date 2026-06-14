@@ -1,0 +1,180 @@
+/* 钻石组件样式（复用部分 .component-card 基础样式） */
+.component-card {
+    background: #fff;
+    border-radius: 24rpx;
+    padding: 24rpx 28rpx;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+    margin-top: 20rpx;
+    border: 2rpx solid #fff0e0;
+}
+
+.diamond-card {
+    border-color: #f0e0ff;
+}
+
+.card-title-row {
+    display: flex;
+    align-items: center;
+    padding-bottom: 16rpx;
+    border-bottom: 2rpx dashed #ffcc99;
+}
+
+.diamond-card .card-title-row {
+    border-bottom-color: #d9b3ff;
+}
+
+.card-icon {
+    width: 36rpx;
+    height: 36rpx;
+    border-radius: 8rpx;
+    margin-right: 14rpx;
+}
+
+.diamond-icon {
+    background: linear-gradient(135deg, #b983ff 0%, #7c3aed 100%);
+    box-shadow: 0 2rpx 6rpx rgba(124, 58, 237, 0.3);
+    transform: rotate(45deg);
+}
+
+.card-title {
+    flex: 1;
+    font-size: 30rpx;
+    font-weight: 700;
+    color: #333;
+}
+
+.card-toggle {
+    font-size: 22rpx;
+    color: #888;
+}
+
+.control-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 20rpx 0 10rpx;
+    gap: 24rpx;
+}
+
+.radio-group {
+    display: flex;
+    gap: 16rpx;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    gap: 6rpx;
+    background: #fafafa;
+    padding: 10rpx 16rpx;
+    border-radius: 30rpx;
+    font-size: 24rpx;
+    color: #555;
+}
+
+.picker-row {
+    display: flex;
+    align-items: center;
+    padding: 16rpx 0;
+    gap: 12rpx;
+    flex-wrap: wrap;
+}
+
+.picker-box {
+    background: #fff4e6;
+    padding: 12rpx 20rpx;
+    border-radius: 30rpx;
+    font-size: 24rpx;
+    color: #FF6B00;
+    font-weight: 500;
+}
+
+.picker-text {
+    font-size: 24rpx;
+}
+
+.small-input {
+    background: #fafafa;
+    border-radius: 30rpx;
+    padding: 10rpx 18rpx;
+    font-size: 24rpx;
+    width: 100rpx;
+    text-align: center;
+}
+
+.num-label {
+    font-size: 22rpx;
+    color: #888;
+    margin-left: 8rpx;
+}
+
+.add-btn {
+    background: linear-gradient(135deg, #b983ff 0%, #7c3aed 100%);
+    color: #fff;
+    padding: 10rpx 24rpx;
+    border-radius: 30rpx;
+    font-size: 24rpx;
+    font-weight: 500;
+    margin-left: auto;
+    box-shadow: 0 4rpx 12rpx rgba(124, 58, 237, 0.25);
+}
+
+.diamond-list {
+    padding: 8rpx 0;
+}
+
+.diamond-row {
+    display: flex;
+    align-items: center;
+    background: #faf7ff;
+    border-radius: 14rpx;
+    padding: 14rpx 16rpx;
+    margin-bottom: 10rpx;
+    gap: 10rpx;
+}
+
+.field-col {
+    flex: 1;
+}
+
+.field-label {
+    display: block;
+    font-size: 20rpx;
+    color: #888;
+    margin-bottom: 4rpx;
+}
+
+.field-input {
+    font-size: 26rpx;
+    color: #333;
+    background: #fff;
+    border-radius: 10rpx;
+    padding: 6rpx 12rpx;
+}
+
+.del-btn {
+    width: 48rpx;
+    height: 48rpx;
+    line-height: 44rpx;
+    text-align: center;
+    background: #ffe0e0;
+    color: #cc3333;
+    border-radius: 50%;
+    font-size: 32rpx;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.result-box {
+    background: #faf7ff;
+    border-radius: 14rpx;
+    padding: 16rpx 20rpx;
+    margin-top: 12rpx;
+}
+
+.result-text {
+    font-size: 22rpx;
+    color: #666;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    word-break: break-all;
+}

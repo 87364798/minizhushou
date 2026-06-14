@@ -1,0 +1,113 @@
+/* 附加组件样式 */
+.component-card {
+    background: #fff;
+    border-radius: 24rpx;
+    padding: 24rpx 28rpx;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+    margin-top: 20rpx;
+    border: 2rpx solid #fff0e0;
+}
+
+.additional-card {
+    border-color: #e0f0ff;
+}
+
+.card-title-row {
+    display: flex;
+    align-items: center;
+    padding-bottom: 16rpx;
+    border-bottom: 2rpx dashed #99ccff;
+}
+
+.card-icon {
+    width: 36rpx;
+    height: 36rpx;
+    border-radius: 10rpx;
+    margin-right: 14rpx;
+}
+
+.additional-icon {
+    background: linear-gradient(135deg, #5dade2 0%, #2e86de 100%);
+    box-shadow: 0 2rpx 6rpx rgba(46, 134, 222, 0.3);
+}
+
+.card-title {
+    flex: 1;
+    font-size: 30rpx;
+    font-weight: 700;
+    color: #333;
+}
+
+.card-toggle {
+    font-size: 22rpx;
+    color: #888;
+}
+
+.list-row {
+    display: flex;
+    align-items: center;
+    background: #f0f7ff;
+    border-radius: 14rpx;
+    padding: 14rpx 16rpx;
+    margin-top: 12rpx;
+    gap: 10rpx;
+}
+
+.field-box {
+    flex: 1;
+}
+
+.field-label {
+    display: block;
+    font-size: 20rpx;
+    color: #888;
+    margin-bottom: 4rpx;
+}
+
+.field-input {
+    font-size: 26rpx;
+    color: #333;
+    background: #fff;
+    border-radius: 10rpx;
+    padding: 6rpx 12rpx;
+}
+
+.del-btn {
+    width: 48rpx;
+    height: 48rpx;
+    line-height: 44rpx;
+    text-align: center;
+    background: #ffe0e0;
+    color: #cc3333;
+    border-radius: 50%;
+    font-size: 32rpx;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.add-btn {
+    background: linear-gradient(135deg, #5dade2 0%, #2e86de 100%);
+    color: #fff;
+    text-align: center;
+    padding: 14rpx 0;
+    border-radius: 30rpx;
+    font-size: 24rpx;
+    font-weight: 500;
+    margin-top: 16rpx;
+    box-shadow: 0 4rpx 12rpx rgba(46, 134, 222, 0.25);
+}
+
+.result-box {
+    background: #f0f7ff;
+    border-radius: 14rpx;
+    padding: 16rpx 20rpx;
+    margin-top: 12rpx;
+}
+
+.result-text {
+    font-size: 22rpx;
+    color: #666;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    word-break: break-all;
+}

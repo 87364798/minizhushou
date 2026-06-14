@@ -1,150 +1,232 @@
-function d(d, a, t) {
-    return a in d ? Object.defineProperty(d, a, {
-        value: t,
-        enumerable: !0,
-        configurable: !0,
-        writable: !0
-    }) : d[a] = t, d;
-}
-
-var a = function(d) {
-    return d && d.__esModule ? d : {
-        default: d
-    };
-}(require("../../dist/vant/toast/toast")), t = require("../../utils/tool.js"), e = require("../../utils/dataer.js");
-
-getApp();
+// 珠宝报价计算主页面
+var tool = require("../../utils/tool.js");
+var dataer = require("../../utils/dataer.js");
 
 Page({
-    _gold: {
-        sum: 0,
-        laborCost: 0,
-        goldValue: ""
-    },
-    _diamond0: {
-        show: !1,
-        sum: 0,
-        diamondValue: ""
-    },
-    _diamond1: {
-        show: !1,
-        sum: 0,
-        diamondValue: ""
-    },
-    _add: {
-        show: !1,
-        sum: 0,
-        addValue: ""
-    },
     data: {
-        Au9999: "0",
-        Au750: "0",
+        Au9999: "720",
+        Au750: "540",
         date: "0-0-0",
         name: "",
         sumMary: {
-            sumMoney: "",
-            str: ""
+            sumMoney: "0",
+            str: "等待输入..."
         },
-        footer: [ {
-            name: "金",
-            checked: !0,
-            disabled: !1
-        }, {
-            name: "主石",
-            checked: !1,
-            disabled: !0
-        }, {
-            name: "副石",
-            checked: !1,
-            disabled: !0
-        }, {
-            name: "附加",
-            checked: !1,
-            disabled: !0
-        }, {
-            name: "总价",
-            checked: !0,
-            disabled: !1
-        } ]
+        footer: [
+            { name: "金", checked: true, disabled: false },
+            { name: "主石", checked: false, disabled: true },
+            { name: "副石", checked: false, disabled: true },
+            { name: "附加", checked: false, disabled: true },
+            { name: "总价", checked: true, disabled: false }
+        ],
+        _gold: {
+            sum: 0,
+            laborCost: 0,
+            goldValue: ""
+        },
+        _diamond0: {
+            show: false,
+            sum: 0,
+            diamondValue: "",
+            wage: 0
+        },
+        _diamond1: {
+            show: false,
+            sum: 0,
+            diamondValue: "",
+            wage: 0
+        },
+        _add: {
+            show: false,
+            sum: 0,
+            addValue: ""
+        }
     },
-    bindInputName: function(d) {
-        this.data.name = d.detail.value;
+
+    /**
+     * 输入品名
+     */
+    bindInputName: function (e) {
+        this.setData({ name: e.detail.value });
     },
-    bindgoldSum: function(d) {
-        this._gold = d.detail, this.sum();
+
+    /**
+     * 子组件（金）回调：金重/损耗/金价等输入改变
+     */
+    bindgoldSum: function (e) {
+        this.data._gold = e.detail;
+        this.sum();
     },
-    bindDiamondSum0: function(a) {
-        var t;
-        this._diamond0 = a.detail;
-        this.setData((t = {}, d(t, "footer[1].checked", this._diamond0.show), d(t, "footer[1].disabled", !this._diamond0.show), 
-        t)), this.sum();
+
+    /**
+     * 子组件（主石）回调
+     */
+    bindDiamondSum0: function (e) {
+        this.data._diamond0 = e.detail;
+        var footer = this.data.footer;
+        footer[1].checked = e.detail.show;
+        footer[1].disabled = !e.detail.show;
+        this.setData({ footer: footer });
+        this.sum();
     },
-    bindDiamondSum1: function(a) {
-        var t;
-        this._diamond1 = a.detail;
-        this.setData((t = {}, d(t, "footer[2].checked", this._diamond1.show), d(t, "footer[2].disabled", !this._diamond1.show), 
-        t)), this.sum();
+
+    /**
+     * 子组件（副石）回调
+     */
+    bindDiamondSum1: function (e) {
+        this.data._diamond1 = e.detail;
+        var footer = this.data.footer;
+        footer[2].checked = e.detail.show;
+        footer[2].disabled = !e.detail.show;
+        this.setData({ footer: footer });
+        this.sum();
     },
-    bindaddSum: function(a) {
-        var t;
-        this._add = a.detail;
-        this.setData((t = {}, d(t, "footer[3].checked", this._add.show), d(t, "footer[3].disabled", !this._add.show), 
-        t)), this.sum();
+
+    /**
+     * 子组件（附加）回调
+     */
+    bindaddSum: function (e) {
+        this.data._add = e.detail;
+        var footer = this.data.footer;
+        footer[3].checked = e.detail.show;
+        footer[3].disabled = !e.detail.show;
+        this.setData({ footer: footer });
+        this.sum();
     },
-    sum: function() {
-        this.data.footer;
-        var d = this._gold.sum, a = "工费：" + this._gold.laborCost + " \n ";
-        a = a + "金总价：" + (this._gold.sum - this._gold.laborCost).toFixed(0) + " \n ", this._diamond0.show && (d += this._diamond0.sum, 
-        a = (a = a + "主石价：" + (this._diamond0.sum - this._diamond0.wage).toFixed(0) + " \n ") + "主镶工：" + this._diamond0.wage + " \n "), 
-        this._diamond1.show && (d += this._diamond1.sum, a = (a = a + "副石价：" + (this._diamond1.sum - this._diamond1.wage).toFixed(0) + " \n ") + "副镶工：" + this._diamond1.wage + " \n "), 
-        this._add.show && (d += this._add.sum, a = a + this._add.addValue + " \n ");
-        var t = this.data.sumMary;
-        t.sumMoney = d.toFixed(0), t.str = a, this.setData({
-            sumMary: t
+
+    /**
+     * 汇总计算并更新页面显示
+     */
+    sum: function () {
+        var gold = this.data._gold;
+        var d0 = this.data._diamond0;
+        var d1 = this.data._diamond1;
+        var add = this.data._add;
+
+        // 基础金额：金价小计
+        var total = gold.sum || 0;
+
+        // 组装汇总说明文字
+        var lines = [];
+        if (gold.goldValue) lines.push(gold.goldValue);
+        if (d0.show && d0.diamondValue) lines.push(d0.diamondValue);
+        if (d1.show && d1.diamondValue) lines.push(d1.diamondValue);
+        if (add.show && add.addValue) lines.push(add.addValue);
+
+        // 累加其他部分金额
+        if (d0.show) total += d0.sum || 0;
+        if (d1.show) total += d1.sum || 0;
+        if (add.show) total += add.sum || 0;
+
+        this.setData({
+            sumMary: {
+                sumMoney: total.toFixed(0),
+                str: lines.length > 0 ? lines.join("\n") : "等待输入..."
+            }
         });
     },
-    bindCheckCopy: function(d) {
-        for (var a = d.detail.value, t = this.data.footer, e = 0; e < t.length; e++) {
-            t[e].checked = !1;
-            for (var i = 0; i < a.length; i++) if (e == a[i]) {
-                t[e].checked = !0;
-                break;
+
+    /**
+     * 勾选需要复制的项
+     */
+    bindCheckCopy: function (e) {
+        var values = e.detail.value || [];
+        var footer = this.data.footer;
+        for (var i = 0; i < footer.length; i++) {
+            if (footer[i].disabled) {
+                // 禁用的保持原状态
+                continue;
+            }
+            var checked = false;
+            for (var j = 0; j < values.length; j++) {
+                if (values[j] == i) {
+                    checked = true;
+                    break;
+                }
+            }
+            footer[i].checked = checked;
+        }
+        this.setData({ footer: footer });
+    },
+
+    /**
+     * 复制结果到剪贴板
+     * - 只勾选"总价"时，复制「品名 + 总价金额
+     * - 勾选了其他项时，复制完整明细
+     */
+    copyData: function () {
+        var footer = this.data.footer;
+        var gold = this.data._gold;
+        var d0 = this.data._diamond0;
+        var d1 = this.data._diamond1;
+        var add = this.data._add;
+
+        // 检查除"总价"外是否有其他勾选
+        var hasOtherChecked =
+            (footer[0].checked && gold.goldValue) ||
+            (footer[1].checked && d0.show && d0.diamondValue) ||
+            (footer[2].checked && d1.show && d1.diamondValue) ||
+            (footer[3].checked && add.show && add.addValue);
+
+        var text;
+
+        if (footer[4].checked && !hasOtherChecked) {
+            // 只勾选了总价 → 简洁版：品名 + 总价
+            text = (this.data.name ? (this.data.name + "：") : "") + this.data.sumMary.sumMoney + "元";
+        } else {
+            // 有其他勾选，或总价未勾选 → 完整明细
+            text = this.data.date + "\n品名：" + this.data.name + "\n\n";
+            if (footer[0].checked && gold.goldValue) text += gold.goldValue + "\n\n";
+            if (footer[1].checked && d0.show && d0.diamondValue) text += d0.diamondValue + "\n\n";
+            if (footer[2].checked && d1.show && d1.diamondValue) text += d1.diamondValue + "\n\n";
+            if (footer[3].checked && add.show && add.addValue) text += add.addValue + "\n";
+            if (footer[4].checked) {
+                text += "以下为各项合计\n" + this.data.sumMary.str + "\n造价：" + this.data.sumMary.sumMoney + "元";
             }
         }
-        this.data.footer = t;
-    },
-    copyData: function() {
-        var d = this.data.footer, t = this.data.date + " \n 品名：" + this.data.name + " \n \n ";
-        d[0].checked && (t = t + this._gold.goldValue + " \n \n "), d[1].checked && (t = t + this._diamond0.diamondValue + " \n \n "), 
-        d[2].checked && (t = t + this._diamond1.diamondValue + " \n \n "), d[3].checked && (t = t + this._add.addValue + " \n "), 
-        d[4].checked && (t = (t = t + "以下为各项合计 \n " + this.data.sumMary.str) + "造价：" + this.data.sumMary.sumMoney + "元"), 
+
         wx.setClipboardData({
-            data: t,
-            success: function(d) {
-                wx.hideToast(), a.default.success("复制成功");
+            data: text,
+            success: function () {
+                wx.showToast({ title: "复制成功", icon: "success" });
             },
-            fail: function(d) {
-                wx.hideToast(), a.default.fail("复制失败");
+            fail: function () {
+                wx.showToast({ title: "复制失败", icon: "none" });
             }
         });
     },
-    onLoad: function(d) {
-        var a = this;
-        e.getGoldPrice(function() {
-            a.updateGoldPrice();
+
+    onLoad: function () {
+        this.updateGoldPrice();
+        var that = this;
+        dataer.getGoldPrice(function () {
+            that.updateGoldPrice();
         });
     },
-    onReady: function() {
+
+    onReady: function () {
         this.updateGoldPrice();
     },
-    updateGoldPrice: function() {
-        var d = wx.getStorageSync("goldPrice");
-        if (d && d.AU9999) {
-            this.setData({
-                Au9999: d.AU9999,
-                Au750: (.75 * d.AU9999).toFixed(2),
-                date: t.getDate()
-            });
+
+    updateGoldPrice: function () {
+        var goldPrice = null;
+        try {
+            goldPrice = wx.getStorageSync("goldPrice");
+        } catch (e) {}
+
+        var au9999 = 720;
+        if (goldPrice && goldPrice.AU9999) {
+            au9999 = Number(goldPrice.AU9999);
+            if (isNaN(au9999) || au9999 <= 0) au9999 = 720;
         }
+
+        this.setData({
+            Au9999: au9999.toFixed(0),
+            Au750: (0.75 * au9999).toFixed(0),
+            date: tool.getDate()
+        });
+
+        // 同时把金价传给金组件（通过 event channel 无法直接传，
+        // 这里通过全局方式让金组件在需要时自行读取 storage）
     }
 });

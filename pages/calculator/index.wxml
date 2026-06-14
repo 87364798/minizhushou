@@ -1,50 +1,60 @@
-<template name="footer">
-    <view class="line-gray"></view>
-    <view class="myTitle-bg ">
-        <view class="myRow">
-            <checkbox-group bindchange="bindCheckCopy">
-                <label wx:for="{{footer}}" wx:key="footer">
-                    <checkbox checked="{{item.checked}}" class="scaleView" disabled="{{item.disabled}}" value="{{index}}">{{item.name}}</checkbox>
-                </label>
-            </checkbox-group>
-            <view bindtap="copyData" class="copyBtn cc">复制数据</view>
-        </view>
-    </view>
-</template>
-<template name="summary">
-    <view class="myTitle-bg mt8">
-        <view class="myTitle">总价</view>
-        <view class="line color--control"></view>
-        <text class="pt c-secondary" style="font-size: 24rpx; ">{{sumMary.str}}</text>
-        <view class="myRow">
-            <text class="c-secondary cc" style="font-size: 24rpx; ">造价：</text>
-            <text class="c-control" style="font-size: 48rpx; ">{{sumMary.sumMoney}}</text>
-        </view>
-    </view>
-</template>
-<van-toast id="van-toast"></van-toast>
 <view class="container">
-    <view class="banner bg-white">
-        <wxc-panel border="{{false}}">
-            <view class="myRow font-size-32">
-                <view>今日金价：</view>
-                <view class="color--control--text p-r-5">{{Au9999}}</view>
-                <view>18K：</view>
-                <view class="color--control--text p-r-5">{{Au750}}</view>
-                <view>{{date}}</view>
+    <!-- 顶部金价信息卡 -->
+    <view class="header-card">
+        <view class="header-title-row">
+            <text class="header-title">珠宝报价</text>
+            <text class="header-date">{{date}}</text>
+        </view>
+        <view class="price-row">
+            <view class="price-box">
+                <text class="price-label">足金 Au9999</text>
+                <text class="price-value">{{Au9999}}<text class="price-unit">元/克</text></text>
             </view>
-        </wxc-panel>
-        <wxc-panel border="{{false}}">
-            <wxc-cc class="myRow font-size-36">
-                <view>品名：</view>
-                <input bindinput="bindInputName" class="iput">{{name}}</input>
-            </wxc-cc>
-        </wxc-panel>
+            <view class="price-box">
+                <text class="price-label">18K金 Au750</text>
+                <text class="price-value">{{Au750}}<text class="price-unit">元/克</text></text>
+            </view>
+        </view>
+        <view class="name-row">
+            <text class="name-label">品名</text>
+            <input class="name-input" placeholder="请输入品名" bindinput="bindInputName" value="{{name}}" />
+        </view>
     </view>
+
+    <!-- 金组件 -->
     <gold bind:goldSum="bindgoldSum"></gold>
+
+    <!-- 钻石组件 -->
     <diamond bind:diamondSum="bindDiamondSum0" pickerIndex="0" title="主石"></diamond>
     <diamond bind:diamondSum="bindDiamondSum1" pickerIndex="1" title="副石"></diamond>
+
+    <!-- 附加组件 -->
     <additional bind:addSum="bindaddSum"></additional>
-    <template is="summary" data="{{sumMary:sumMary}}"></template>
-    <template is="footer" data="{{footer:footer}}"></template>
+
+    <!-- 汇总 -->
+    <view class="summary-card">
+        <view class="summary-title-row">
+            <text class="summary-title">总价</text>
+        </view>
+        <view class="summary-detail">
+            <text class="summary-text">{{sumMary.str}}</text>
+        </view>
+        <view class="summary-total-row">
+            <text class="total-label">造价：</text>
+            <text class="total-value">¥{{sumMary.sumMoney}}</text>
+        </view>
+    </view>
+
+    <!-- 勾选复制 -->
+    <view class="footer-card">
+        <checkbox-group bindchange="bindCheckCopy">
+            <view class="checkbox-row">
+                <label class="checkbox-item" wx:for="{{footer}}" wx:key="name">
+                    <checkbox value="{{index}}" checked="{{item.checked}}" disabled="{{item.disabled}}" color="#FF6B00" />
+                    <text class="checkbox-text">{{item.name}}</text>
+                </label>
+            </view>
+        </checkbox-group>
+        <view class="copy-btn" bindtap="copyData">复制报价</view>
+    </view>
 </view>

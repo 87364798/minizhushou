@@ -1,54 +1,69 @@
-<wxc-panel border="{{false}}" class="myTitle flex">
-    <checkbox-group bindchange="bindCheckTitle" data-checked="{{show}}" data-tag="diamond">
-        <checkbox checked="{{show}}" class="scaleView">{{title}}</checkbox>
-    </checkbox-group>
-</wxc-panel>
-<view class="myTitle-bg {{show?'':'hide'}} flex">
-    <view class="line color--control"></view>
-    <view class="row flex">
-        <radio-group bindchange="bindRadioLeft">
-            <label class="col col-6" wx:for="{{radioLeft}}" wx:key="radioLeft">
-                <radio checked="{{item.checked}}" class="scaleView" value="{{index}}">{{item.name}}</radio>
-            </label>
-        </radio-group>
-        <radio-group bindchange="bindRadioRight">
-            <label class="col col-6" wx:for="{{radioRight}}" wx:for-item="right" wx:key="radioRight">
-                <radio checked="{{right.checked}}" class="scaleView" disabled="{{disabled}}" value="{{index}}">{{right.name}}</radio>
-            </label>
-        </radio-group>
+<view class="component-card diamond-card">
+    <view class="card-title-row" bindtap="bindCheckTitle">
+        <view class="card-icon diamond-icon"></view>
+        <text class="card-title">{{title}}</text>
+        <text class="card-toggle">{{show ? '收起' : '展开'}}</text>
     </view>
-    <view class="myRow font-12 c-secondary flex">
-        <view class="col col-4">
-            <picker bindchange="bindPickerChange" range="{{picker}}" rangeKey="name" value="{{index}}">
-                <view>{{picker[pickerIndex].name}}</view>
+
+    <view wx:if="{{show}}">
+        <!-- 顶部控制区：尺寸单位 & 计价方式 -->
+        <view class="control-row">
+            <radio-group class="radio-group" bindchange="bindRadioLeft">
+                <label class="radio-item">
+                    <radio value="0" checked="{{isMm}}" color="#FF6B00" />
+                    <text>mm</text>
+                </label>
+                <label class="radio-item">
+                    <radio value="1" checked="{{!isMm}}" color="#FF6B00" />
+                    <text>ct</text>
+                </label>
+            </radio-group>
+            <radio-group class="radio-group" bindchange="bindRadioRight">
+                <label class="radio-item">
+                    <radio value="0" checked="{{isSinglePrice}}" color="#FF6B00" />
+                    <text>单粒</text>
+                </label>
+                <label class="radio-item">
+                    <radio value="1" checked="{{!isSinglePrice}}" color="#FF6B00" />
+                    <text>总数</text>
+                </label>
+            </radio-group>
+        </view>
+
+        <!-- 镶工 / 添加行 -->
+        <view class="picker-row">
+            <picker bindchange="bindPickerChange" range="{{picker}}" range-key="name" value="{{pickerIndex}}">
+                <view class="picker-box">
+                    <text class="picker-text">{{picker[pickerIndex].name}}</text>
+                </view>
             </picker>
+            <input class="small-input" type="digit" placeholder="工费" value="{{picker[pickerIndex].wage}}" bindinput="bindWageInput" />
+            <text class="num-label">项数</text>
+            <input class="small-input" type="number" placeholder="1" value="{{addNum}}" bindinput="bindAddNumInput" />
+            <view class="add-btn" data-tag="add" bindtap="bindAddAndDel">+添加</view>
         </view>
-        <input bindinput="bindWegeInput" class="col col-4 iput" type="digit" value="{{picker[pickerIndex].wage}}"></input>
-        <view class="col col-4">
-      项数：
-    </view>
-        <input bindinput="bindAddNumInput" class="col col-4 iput" type="number" value="{{addNum}}"></input>
-        <view class="col col-6">
-            <view bindtap="bindDiamondAddAndDel" class="btn cc" data-tag="add">添加</view>
+
+        <!-- 每项输入 -->
+        <view class="diamond-list">
+            <view class="diamond-row" wx:for="{{diamondDataList}}" wx:key="index">
+                <view class="field-col">
+                    <text class="field-label">{{isMm ? 'mm' : 'ct'}}</text>
+                    <input class="field-input" type="digit" data-tag="size" data-idx="{{index}}" bindinput="bindDataListInput" value="{{item.size}}" />
+                </view>
+                <view class="field-col">
+                    <text class="field-label">粒数</text>
+                    <input class="field-input" type="number" data-tag="piece" data-idx="{{index}}" bindinput="bindDataListInput" value="{{item.piece}}" />
+                </view>
+                <view class="field-col">
+                    <text class="field-label">{{isSinglePrice ? '单价' : '石价'}}</text>
+                    <input class="field-input" type="digit" data-tag="price" data-idx="{{index}}" bindinput="bindDataListInput" value="{{item.price}}" />
+                </view>
+                <view class="del-btn" data-tag="del" data-idx="{{index}}" bindtap="bindAddAndDel">×</view>
+            </view>
+        </view>
+
+        <view class="result-box">
+            <text class="result-text">{{result}}</text>
         </view>
     </view>
-    <view class="myRow font-12 pt c-secondary flex" wx:for="{{diamondDataList}}" wx:for-item="list" wx:key="diamondDataList">
-        <view class="col col-3">
-        {{disabled?'mm':'ct'}}：
-      </view>
-        <input bindinput="bindDataListInput" class="col col-3 iput" data-tag="size" id="{{index}}" type="digit" value="{{list.size}}"></input>
-        <view class="col col-3">
-        粒数：
-      </view>
-        <input bindinput="bindDataListInput" class="col col-3 iput" data-tag="piece" id="{{index}}" type="number" value="{{list.piece}}"></input>
-        <view class="col col-3">
-        石价：
-      </view>
-        <input bindinput="bindDataListInput" class="col col-3 iput" data-tag="price" id="{{index}}" type="number" value="{{list.price}}"></input>
-        <view class="cc col col-3">
-            <van-icon bindtap="bindDiamondAddAndDel" color="#888" data-tag="del" id="{{index}}" name="delete" size="20px"></van-icon>
-        </view>
-    </view>
-    <view class="line-gray "></view>
-    <text class="c-secondary" style="font-size: 24rpx; ">{{result}}</text>
 </view>
